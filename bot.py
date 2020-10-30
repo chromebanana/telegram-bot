@@ -44,8 +44,8 @@ def remove_job_if_exists(name, context):
 def set_reminder(update, context):
     chat_id = update.message.chat_id
     try:
-        due = datetime.time(14, 26, 0)
-        days = [1, 2, 3, 4]  # only weds for now
+        due = datetime.time(18, 0, 0)
+        days = [1]  # only weds for now
 
         job_removed = remove_job_if_exists(str(chat_id), context)
         context.job_queue.run_daily(
