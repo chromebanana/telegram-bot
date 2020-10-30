@@ -43,21 +43,19 @@ def remove_job_if_exists(name, context):
 
 def set_reminder(update, context):
     chat_id = update.message.chat_id
-    try:
-        due = datetime.time(18, 0, 0)
-        days = [1]  # only weds for now
+    due = datetime.time(18, 0, 0)
+    days = [1]  # only weds for now
 
-        job_removed = remove_job_if_exists(str(chat_id), context)
-        context.job_queue.run_daily(
-            alarm, due, days, context=chat_id, name=str(chat_id))
+    job_removed = remove_job_if_exists(str(chat_id), context)
+    context.job_queue.run_daily(
+        alarm, due, days, context=chat_id, name=str(chat_id))
 
-        text = 'Bin reminder successfully set!'
-        if job_removed:
-            text += ' Old one was removed.'
-        update.message.reply_text(text)
+    text = 'Bin reminder successfully set for Wednesday 18:00!'
+    if job_removed:
+        text += ' Old one was removed.'
+    update.message.reply_text(text)
 
-    except (IndexError, ValueError):
-        update.message.reply_text('Usage: /set <seconds>')
+
 
 
 def unset(update, context):
