@@ -22,6 +22,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 PORT = int(os.environ.get('PORT', 5000))
 TOKEN = os.environ.get('BOT_TOKEN')
+APP_NAME = os.environ.get('HEROKU_APP_NAME')
 
 # Enable logging
 logging.basicConfig(
@@ -117,7 +118,7 @@ def main():
     updater.start_webhook(listen="0.0.0.0",
                           port=int(PORT),
                           url_path=TOKEN)
-    updater.bot.setWebhook('https://yourherokuappname.herokuapp.com/' + TOKEN)
+    updater.bot.setWebhook('https://' + APP_NAME + '.herokuapp.com/' + TOKEN)
 
     # Block until you press Ctrl-C or the process receives SIGINT, SIGTERM or
     # SIGABRT. This should be used most of the time, since start_polling() is
